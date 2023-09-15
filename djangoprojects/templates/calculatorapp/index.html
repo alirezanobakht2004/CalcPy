@@ -14,7 +14,7 @@
   <title>Django Calculator</title>
 </head>
 
-<body>
+<body class="bg-light">
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
       <a class="navbar-brand" href="#">Django Calculator App</a>
@@ -26,7 +26,10 @@
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
           <li class="nav-item">
-            <a class="nav-link" href="#">About</a>
+            <a class="nav-link" href="#about">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#Instructions">Instructions</a>
           </li>
         </ul>
       </div>
@@ -34,12 +37,37 @@
   </nav>
 
   <div class="containaer-fliud" style="margin-bottom: 20rem;">
+    {% if error %}
+    <div class="row">
+      <div class="col-md-6" style="margin: 0 auto;">
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+          <strong>Error!</strong>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+    {% if result %}
+    <div class="row">
+      <div class="col-md-6" style="margin: 0 auto;">
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+          <strong>{{q}} = {{ans}}</strong>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+
     <div class="row">
       <div class="col-md-6" style="margin: 1rem auto 0 auto;">
-        <img class="img-fluid" src="{% static 'main.jpg' %}">
+        <img class="img-fluid" src="{% static 'logo.jpg' %}" style="width: 100%;">
         <div class="card">
           <div class="card-body">
-            <form method="get" action="#">
+            <form method="GET" action="{% url 'submitquery' %}">
               <div class="form-group">
                 <input type="search" class="form-control" name="query" id="query">
               </div>
@@ -54,6 +82,36 @@
             </form>
           </div>
         </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6" style="margin: 2rem auto 0 auto;">
+        <p class="display-4" id="about" name="about" style="text-align: center;">
+          About
+        </p>
+        <hr>
+        <p class="lead" style="text-align: center;">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus non ab praesentium deserunt in. Animi.
+        </p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6" style="margin: 2rem auto 0 auto;">
+        <p class="display-4" id="Instructions" name="about" style="text-align: center;">
+          Instructions
+        </p>
+        <hr>
+        <ul class="list-group" style="text-align: center;">
+          <li class="list-group-item">+ Addition</li>
+          <li class="list-group-item">- Minus</li>
+          <li class="list-group-item">* Multiplication</li>
+          <li class="list-group-item">/ Devision</li>
+          <li class="list-group-item">// Floor Devision</li>
+          <li class="list-group-item">** Exponential</li>
+          <li class="list-group-item">% Mod</li>
+          <li class="list-group-item">( ) Parentheses</li>
+        </ul>
       </div>
     </div>
   </div>
